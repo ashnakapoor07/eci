@@ -1,0 +1,35 @@
+{% extends 'voting/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ECI{% endblock %}</title>
+</head>
+{% block body %}
+<body background="http://www.franchisemart.in/franchise/wp-content/uploads/2014/04/Voting-In-India.gif" style="background-repeat:no-repeat;background-position:center bottom">
+{% if all_candidates %}
+<h1 >ONLINE VOTING FORUM</h1>
+<h3 >CANDIDATES FOR THE SEAT OF MLA </h3>
+<ul>
+    {% for cand in all_candidates %}
+    <li>
+        <a href="{% url 'voting:detail' cand.id %}"/>
+
+        {{cand.name}}
+        <ul>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+        <form action="{% url 'voting:candidate-delete' cand.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">
+                <span class="gylphicon glyphicon-remove"></span>
+            </button>
+        </form>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{%else%}
+<h3> NO CANDIDATE</h3>
+{%endif%}
+{% endblock %}
+</body>
+</html>

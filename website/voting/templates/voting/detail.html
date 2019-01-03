@@ -1,0 +1,28 @@
+
+
+{% extends 'voting/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}DETAILS OF CANDIDATES{% endblock %}</title>
+</head>
+{% block body %}
+<body background="https://media.giphy.com/media/6Rq26IpiNh75C/giphy.gif" style="background-repeat:no-repeat;background-position:center bottom">
+{% if error_message %}
+<p> <strong>{{error_message}}</strong></p>
+{% endif %}
+<img src="{{candidate.photo}}" width="300" height="300">
+<h1>{{candidate.name}}</h1>
+<h4>POLITICAL PARTY:{{candidate.political_party}}</h4>
+<h4>QUOTE:{{candidate.quote}}</h4>
+<h4>PARTY LOGO:{{candidate.logo}}</h4>
+<h4>AREA:{{candidate.area}}</h4>
+     <form action="thankyou/" method="post">
+         {% csrf_token %}
+    <input type="submit" value="VOTE" />
+</form>
+
+{% endblock %}
+</body>
+</html>
